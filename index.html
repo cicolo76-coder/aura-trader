@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#0a0e1a">
-<title>AURA TRADER PRO v3 — Autonomous Quant Engine</title>
+<title>AURA TRADER PRO v3.1 — Kraken Edition</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -272,8 +272,8 @@
   <div class="brand">
     <div class="brand-mark"><span>AT</span></div>
     <div class="brand-name">
-      <h1>AURA <span>TRADER</span> v3</h1>
-      <small>Autonomous Quant Engine</small>
+      <h1>AURA <span>TRADER</span> v3.1</h1>
+      <small>Kraken Edition · Quant Engine</small>
     </div>
   </div>
   <div class="topbar-spacer"></div>
@@ -491,7 +491,7 @@
 
 <div class="footer">
   <div class="quote">"Risk comes from not knowing what you are doing." — W.Buffett · "Find the edge, repeat it." — J.Simons</div>
-  AURA TRADER PRO v3 · Multi-Strategy · ATR Stops · Kelly Sizing · Backtest · Telegram · Firebase
+  AURA TRADER PRO v3.1 · Kraken Edition · Multi-Strategy · ATR Stops · Kelly Sizing · Backtest · Telegram · Firebase
 </div>
 
 </main>
@@ -529,7 +529,7 @@
     <div class="modal-body">
       <div style="display:flex;gap:4px;margin-bottom:14px;overflow-x:auto">
         <button class="tab-btn active" data-stab="risk">RISK</button>
-        <button class="tab-btn" data-stab="api">BINANCE</button>
+        <button class="tab-btn" data-stab="api">KRAKEN</button>
         <button class="tab-btn" data-stab="proxy">PROXY</button>
         <button class="tab-btn" data-stab="telegram">TELEGRAM</button>
         <button class="tab-btn" data-stab="firebase">FIREBASE</button>
@@ -558,31 +558,27 @@
         <div class="api-status unk" id="api-status"><span class="dot"></span><span id="api-status-text">API non configurate</span></div>
         <p>Le chiavi sono salvate <strong>solo nel localStorage del dispositivo</strong>.</p>
         <div class="settings-grid" style="grid-template-columns:1fr">
-          <div class="field full"><label>API Key</label><input type="text" id="api-key" autocomplete="off"></div>
-          <div class="field full"><label>API Secret</label><input type="password" id="api-secret" autocomplete="off"></div>
+          <div class="field full"><label>API Key (Kraken)</label><input type="text" id="api-key" autocomplete="off" placeholder="56 caratteri alfanumerici"></div>
+          <div class="field full"><label>Private Key (Kraken, base64)</label><input type="password" id="api-secret" autocomplete="off" placeholder="Stringa base64 fornita da Kraken"></div>
         </div>
         <div class="btn-row">
           <button class="btn-secondary" id="btn-api-test">TEST</button>
           <button class="btn-secondary" id="btn-api-clear">CANCELLA</button>
           <button class="btn-primary" id="btn-api-save">SALVA</button>
         </div>
-        <div class="warn-box"><strong>Prima di Live:</strong><ul style="margin-top:6px;color:#fca5a5"><li>API SOLO Spot Trading</li><li>NO Withdrawals, NO Futures</li><li>IP whitelist cellulare</li><li>Test con €50–100 prima</li></ul></div>
+        <div class="warn-box"><strong>Prima di Live (Kraken):</strong><ul style="margin-top:6px;color:#fca5a5"><li>Query Funds + Query/Create/Cancel Orders</li><li>NO Withdraw Funds (lascia spento)</li><li>NO Margin/Futures/Earn</li><li>IP whitelist: lascia vuoto (qualunque IP)</li><li>Test con €50–100 in USDT prima</li></ul></div>
       </div>
 
       <div class="stab" data-stab="proxy" style="display:none">
-        <h4>Endpoint Binance / Proxy</h4>
-        <p>Se le chiamate falliscono per CORS, prova un mirror o un Cloudflare Worker.</p>
-        <div class="field full"><label>Endpoint attivo</label><input type="text" id="api-endpoint" value="https://api.binance.com"></div>
+        <h4>Endpoint Kraken / Proxy</h4>
+        <p>Kraken supporta CORS aperto: di solito non serve proxy. Cambia endpoint solo se hai problemi.</p>
+        <div class="field full"><label>Endpoint attivo</label><input type="text" id="api-endpoint" value="https://api.kraken.com"></div>
         <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">
-          <button class="btn-secondary endpoint-quick" data-url="https://api.binance.com">api</button>
-          <button class="btn-secondary endpoint-quick" data-url="https://api1.binance.com">api1</button>
-          <button class="btn-secondary endpoint-quick" data-url="https://api2.binance.com">api2</button>
-          <button class="btn-secondary endpoint-quick" data-url="https://api3.binance.com">api3</button>
-          <button class="btn-secondary endpoint-quick" data-url="https://api4.binance.com">api4</button>
-          <button class="btn-secondary endpoint-quick" data-url="https://testnet.binance.vision">testnet</button>
+          <button class="btn-secondary endpoint-quick" data-url="https://api.kraken.com">kraken</button>
+          <button class="btn-secondary endpoint-quick" data-url="https://futures.kraken.com/derivatives/api/v3">futures (RO)</button>
         </div>
-        <h4 style="margin-top:16px">Cloudflare Worker (consigliato)</h4>
-        <p>Setup 10 min, 100k req/giorno gratis.</p>
+        <h4 style="margin-top:16px">Cloudflare Worker (opzionale)</h4>
+        <p>Non serve per Kraken in condizioni normali. Lascialo qui per emergenza.</p>
         <ol><li>dash.cloudflare.com → Workers → Create</li><li>Sostituisci codice con quello qui sotto</li><li>Deploy → URL tipo <code>xxx.workers.dev</code></li><li>Incollalo come Endpoint</li></ol>
 <pre id="worker-code">export default {
   async fetch(req) {
@@ -594,7 +590,7 @@
       }
     });
     const url = new URL(req.url);
-    const target = 'https://api.binance.com' + url.pathname + url.search;
+    const target = 'https://api.kraken.com' + url.pathname + url.search;
     const headers = new Headers(req.headers);
     headers.delete('host');
     const resp = await fetch(target, { method: req.method, headers, body: req.body });
@@ -667,12 +663,22 @@
 // ===================================================================
 // STATE
 // ===================================================================
-const UNIVERSE = ['BTCUSDT','ETHUSDT','SOLUSDT','BNBUSDT','XRPUSDT','ADAUSDT','DOGEUSDT','AVAXUSDT','LINKUSDT','DOTUSDT','MATICUSDT','NEARUSDT','ATOMUSDT','LTCUSDT','ARBUSDT'];
+const UNIVERSE = ['XBTUSDT','ETHUSDT','SOLUSDT','BNBUSDT','XRPUSDT','ADAUSDT','AVAXUSDT','LINKUSDT','DOTUSDT','ATOMUSDT','LTCUSDT','BCHUSDT','ALGOUSDT','APEUSDT','SHIBUSDT'];
+
+// Mappa per display: Kraken usa XBT ma vogliamo mostrare BTC all'utente
+const DISPLAY_MAP = { 'XBT': 'BTC' };
+function displaySymbol(sym) {
+  const base = displaySymbol(sym);
+  return (DISPLAY_MAP[base] || base);
+}
+function displayPair(sym) {
+  return displaySymbol(sym) + '/USDT';
+}
 
 const STATE = {
   universe: UNIVERSE,
   scanData: {},
-  currentSymbol: 'BTCUSDT',
+  currentSymbol: 'XBTUSDT',
   timeframe: '15m',
   strategy: 'buffett',
   candles: [],
@@ -687,7 +693,7 @@ const STATE = {
   botActive: false,
   lastTradeAt: 0,
   mode: 'paper',
-  api: { key: '', secret: '', endpoint: 'https://api.binance.com', verified: false },
+  api: { key: '', secret: '', endpoint: 'https://api.kraken.com', verified: false },
   tg: { token: '', chat: '' },
   fb: { project: '', apikey: '', uid: '' },
   news: { apikey: '', cache: {} },
@@ -1005,7 +1011,7 @@ async function checkNews(symbol) {
   if (!STATE.news.apikey) return { blocked: false };
   const cached = STATE.news.cache[symbol];
   if (cached && Date.now() - cached.t < 600000) return cached.r;
-  const base = symbol.replace('USDT', '');
+  const base = displaySymbol(symbol);
   try {
     const url = `https://cryptopanic.com/api/v1/posts/?auth_token=${STATE.news.apikey}&currencies=${base}&filter=hot&public=true`;
     const r = await fetch(url);
@@ -1019,35 +1025,80 @@ async function checkNews(symbol) {
 }
 
 // ===================================================================
-// BINANCE API
+// KRAKEN API: signed requests (HMAC-SHA512 con schema custom)
 // ===================================================================
-async function hmacSha256Hex(key, data) {
-  const enc = new TextEncoder();
-  const cryptoKey = await crypto.subtle.importKey('raw', enc.encode(key), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
-  const sigBuf = await crypto.subtle.sign('HMAC', cryptoKey, enc.encode(data));
-  return Array.from(new Uint8Array(sigBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
+// Kraken signature recipe:
+//   sha512( URI_path + sha256(nonce + POST_data), base64(secret) )
+//   risultato encoded in base64
+
+function base64Decode(str) {
+  const bin = atob(str);
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return bytes;
+}
+function base64Encode(bytes) {
+  let bin = '';
+  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+  return btoa(bin);
+}
+async function sha256Bytes(data) {
+  const buf = await crypto.subtle.digest('SHA-256', data);
+  return new Uint8Array(buf);
+}
+async function hmacSha512Base64(secretBytes, msgBytes) {
+  const key = await crypto.subtle.importKey('raw', secretBytes, { name: 'HMAC', hash: 'SHA-512' }, false, ['sign']);
+  const sigBuf = await crypto.subtle.sign('HMAC', key, msgBytes);
+  return base64Encode(new Uint8Array(sigBuf));
 }
 
 async function signedRequest(method, path, params = {}) {
   if (!STATE.api.key || !STATE.api.secret) throw new Error('API non configurate');
-  params.timestamp = Date.now();
-  params.recvWindow = 10000;
-  const qs = Object.entries(params).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&');
-  const sig = await hmacSha256Hex(STATE.api.secret, qs);
-  const url = `${STATE.api.endpoint}${path}?${qs}&signature=${sig}`;
-  const r = await fetch(url, { method, headers: { 'X-MBX-APIKEY': STATE.api.key } });
+  // Kraken: nonce è un timestamp sempre crescente
+  params.nonce = Date.now().toString() + Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+  const postData = Object.entries(params).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&');
+
+  // Build message: path + sha256(nonce + postData)
+  const enc = new TextEncoder();
+  const noncePostBytes = enc.encode(params.nonce + postData);
+  const sha = await sha256Bytes(noncePostBytes);
+  const pathBytes = enc.encode(path);
+  const msg = new Uint8Array(pathBytes.length + sha.length);
+  msg.set(pathBytes, 0);
+  msg.set(sha, pathBytes.length);
+
+  const secretBytes = base64Decode(STATE.api.secret);
+  const sig = await hmacSha512Base64(secretBytes, msg);
+
+  const url = `${STATE.api.endpoint}${path}`;
+  const r = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'API-Key': STATE.api.key,
+      'API-Sign': sig,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: postData,
+  });
   const data = await r.json();
-  if (!r.ok) throw new Error(data.msg || `HTTP ${r.status}`);
-  return data;
+  if (data.error && data.error.length) throw new Error(data.error.join(', '));
+  return data.result || data;
 }
 
 async function placeLiveOrder(symbol, side, quoteUSDT, refPrice, baseQty = null) {
   try {
-    const params = { symbol, side, type: 'MARKET' };
-    if (side === 'BUY') params.quoteOrderQty = quoteUSDT.toFixed(2);
-    else params.quantity = baseQty ? baseQty.toFixed(6) : (quoteUSDT / refPrice).toFixed(6);
-    const res = await signedRequest('POST', '/api/v3/order', params);
-    logLine('live', `Ordine Binance OK · id ${res.orderId}`);
+    // Kraken AddOrder: ordertype=market, type=buy/sell, pair=XBTUSDT, volume=baseQty
+    // Per BUY market con quoteUSDT, usiamo volume = quoteUSDT/refPrice (approssimazione)
+    const volume = baseQty ? baseQty.toFixed(6) : (quoteUSDT / refPrice).toFixed(6);
+    const params = {
+      pair: symbol,
+      type: side.toLowerCase(),     // 'buy' o 'sell'
+      ordertype: 'market',
+      volume,
+    };
+    const res = await signedRequest('POST', '/0/private/AddOrder', params);
+    const txid = (res.txid && res.txid[0]) || 'unknown';
+    logLine('live', `Ordine Kraken OK · id ${txid}`);
     return true;
   } catch (e) {
     logLine('error', `Errore ordine: ${e.message}`);
@@ -1058,11 +1109,12 @@ async function placeLiveOrder(symbol, side, quoteUSDT, refPrice, baseQty = null)
 
 async function verifyApi() {
   try {
-    const data = await signedRequest('GET', '/api/v3/account', {});
-    const balances = (data.balances || []).filter(b => parseFloat(b.free) > 0 || parseFloat(b.locked) > 0);
+    const data = await signedRequest('POST', '/0/private/Balance', {});
+    // data è un oggetto { ASSET: "0.0000", ... }
+    const balances = Object.entries(data).filter(([k, v]) => parseFloat(v) > 0);
     STATE.api.verified = true;
-    const usdt = balances.find(b => b.asset === 'USDT');
-    setApiStatus('ok', `OK · ${balances.length} asset · USDT ${usdt ? parseFloat(usdt.free).toFixed(2) : '0'}`);
+    const usdt = data['USDT'] || data['ZUSD'] || '0';
+    setApiStatus('ok', `OK Kraken · ${balances.length} asset · USDT ${parseFloat(usdt).toFixed(2)}`);
     return { ok: true, balances };
   } catch (e) {
     STATE.api.verified = false;
@@ -1078,12 +1130,29 @@ function setApiStatus(kind, text) {
   document.getElementById('api-status-text').textContent = text;
 }
 
+// Kraken timeframe map: convertiamo i nostri tf testuali nei minuti che Kraken accetta
+const KRAKEN_TF = { '1m': 1, '5m': 5, '15m': 15, '1h': 60, '4h': 240, '1d': 1440 };
+
 async function fetchKlines(symbol, interval, limit = 200) {
-  const url = `${STATE.api.endpoint}/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=${limit}`;
+  const tfMin = KRAKEN_TF[interval] || 15;
+  const url = `${STATE.api.endpoint}/0/public/OHLC?pair=${symbol}&interval=${tfMin}`;
   const r = await fetch(url);
   if (!r.ok) throw new Error('Klines HTTP ' + r.status);
   const data = await r.json();
-  return data.map(k => ({ time: k[0], open: +k[1], high: +k[2], low: +k[3], close: +k[4], volume: +k[5], isFinal: true }));
+  if (data.error && data.error.length) throw new Error(data.error.join(', '));
+  // Kraken returns result keyed by pair name (might be remapped, e.g. XBTUSDT → XBTUSDT, BTCUSDT → XBTUSDT)
+  const result = data.result || {};
+  const keys = Object.keys(result).filter(k => k !== 'last');
+  if (!keys.length) return [];
+  const arr = result[keys[0]] || [];
+  // Kraken format: [time, open, high, low, close, vwap, volume, count]
+  const candles = arr.map(k => ({
+    time: k[0] * 1000,
+    open: +k[1], high: +k[2], low: +k[3], close: +k[4],
+    volume: +k[6], isFinal: true,
+  }));
+  // Kraken non ha "limit" param: tagliamo lato client se serve
+  return limit && candles.length > limit ? candles.slice(-limit) : candles;
 }
 
 // ===================================================================
@@ -1149,13 +1218,13 @@ async function executeBuy(symbol, price, reason, confidence, atr, score) {
   if (STATE.news.apikey) {
     const n = await checkNews(symbol);
     if (n.blocked) {
-      logLine('warn', `${symbol.replace('USDT','')} bloccato da news`);
-      sendTelegram(`⚠ <b>${symbol.replace('USDT','')}</b> entry bloccato per news`);
+      logLine('warn', `${displaySymbol(symbol)} bloccato da news`);
+      sendTelegram(`⚠ <b>${displaySymbol(symbol)}</b> entry bloccato per news`);
       document.getElementById('news-pill').style.display = 'inline-flex';
       return false;
     }
   }
-  if (isCorrelatedWithOpenPositions(symbol)) { logLine('warn', `${symbol.replace('USDT','')} correlato`); return false; }
+  if (isCorrelatedWithOpenPositions(symbol)) { logLine('warn', `${displaySymbol(symbol)} correlato`); return false; }
 
   const sizing = computePositionSize(score, confidence, atr, price);
   const sizeUSD = STATE.wallet.usd * sizing.sizePct;
@@ -1178,9 +1247,9 @@ async function executeBuy(symbol, price, reason, confidence, atr, score) {
   STATE.positions.push(pos);
   STATE.lastTradeAt = Date.now();
   const tag = STATE.mode === 'live' ? 'LIVE' : 'PAPER';
-  logLine(STATE.mode === 'live' ? 'live' : 'buy', `${tag} BUY ${symbol.replace('USDT','')} ${qty.toFixed(6)} @ $${fmtPx(price)} · size ${(sizing.sizePct * 100).toFixed(1)}% · ${reason}`);
-  sendTelegram(`🟢 <b>${tag} BUY ${symbol.replace('USDT','')}</b>\n@ $${fmtPx(price)}\nSize ${(sizing.sizePct * 100).toFixed(1)}% · $${sizeUSD.toFixed(2)}\nSL $${fmtPx(stopLoss)} · TP $${fmtPx(takeProfit)}\n${reason}`);
-  voiceSay(`Acquisto ${symbol.replace('USDT','')}`);
+  logLine(STATE.mode === 'live' ? 'live' : 'buy', `${tag} BUY ${displaySymbol(symbol)} ${qty.toFixed(6)} @ $${fmtPx(price)} · size ${(sizing.sizePct * 100).toFixed(1)}% · ${reason}`);
+  sendTelegram(`🟢 <b>${tag} BUY ${displaySymbol(symbol)}</b>\n@ $${fmtPx(price)}\nSize ${(sizing.sizePct * 100).toFixed(1)}% · $${sizeUSD.toFixed(2)}\nSL $${fmtPx(stopLoss)} · TP $${fmtPx(takeProfit)}\n${reason}`);
+  voiceSay(`Acquisto ${displaySymbol(symbol)}`);
   STATE.currentSymbol = symbol;
   saveSession();
   return true;
@@ -1210,9 +1279,9 @@ async function executeSell(positionId, price, reason) {
   STATE.positions.splice(idx, 1);
   STATE.lastTradeAt = Date.now();
   const tag = STATE.mode === 'live' ? 'LIVE' : 'PAPER';
-  logLine(STATE.mode === 'live' ? 'live' : 'sell', `${tag} SELL ${p.symbol.replace('USDT','')} @ $${fmtPx(price)} · P&L ${pnl >= 0 ? '+' : ''}$${pnl.toFixed(2)} (${pnlPct >= 0 ? '+' : ''}${pnlPct.toFixed(2)}%) · ${reason}`);
-  sendTelegram(`${pnl >= 0 ? '🟢' : '🔴'} <b>${tag} SELL ${p.symbol.replace('USDT','')}</b>\n@ $${fmtPx(price)}\nP&L ${pnl >= 0 ? '+' : ''}$${pnl.toFixed(2)} (${pnlPct >= 0 ? '+' : ''}${pnlPct.toFixed(2)}%)\n${reason}`);
-  voiceSay(`Vendita ${p.symbol.replace('USDT','')} ${pnl >= 0 ? 'profitto' : 'perdita'}`);
+  logLine(STATE.mode === 'live' ? 'live' : 'sell', `${tag} SELL ${displaySymbol(p.symbol)} @ $${fmtPx(price)} · P&L ${pnl >= 0 ? '+' : ''}$${pnl.toFixed(2)} (${pnlPct >= 0 ? '+' : ''}${pnlPct.toFixed(2)}%) · ${reason}`);
+  sendTelegram(`${pnl >= 0 ? '🟢' : '🔴'} <b>${tag} SELL ${displaySymbol(p.symbol)}</b>\n@ $${fmtPx(price)}\nP&L ${pnl >= 0 ? '+' : ''}$${pnl.toFixed(2)} (${pnlPct >= 0 ? '+' : ''}${pnlPct.toFixed(2)}%)\n${reason}`);
+  voiceSay(`Vendita ${displaySymbol(p.symbol)} ${pnl >= 0 ? 'profitto' : 'perdita'}`);
   saveSession();
   return true;
 }
@@ -1283,9 +1352,9 @@ async function evaluateNewEntries() {
   const cs = topCandidates();
   if (!cs.length) { setBotSubstate('Nessun BUY'); return; }
   const best = cs[0];
-  if (best.score < STATE.settings.minScore) { setBotSubstate(`Top ${best.symbol.replace('USDT','')} ${best.score.toFixed(0)} < ${STATE.settings.minScore}`); return; }
-  setBotSubstate(`Apertura ${best.symbol.replace('USDT','')} score ${best.score.toFixed(0)}`);
-  logLine('scan', `Selezione ${best.symbol.replace('USDT','')} score ${best.score.toFixed(0)}`);
+  if (best.score < STATE.settings.minScore) { setBotSubstate(`Top ${displaySymbol(best.symbol)} ${best.score.toFixed(0)} < ${STATE.settings.minScore}`); return; }
+  setBotSubstate(`Apertura ${displaySymbol(best.symbol)} score ${best.score.toFixed(0)}`);
+  logLine('scan', `Selezione ${displaySymbol(best.symbol)} score ${best.score.toFixed(0)}`);
   await executeBuy(best.symbol, best.price, best.reason, best.confidence, best.atr, best.score);
 }
 
@@ -1298,8 +1367,8 @@ async function evaluatePositionMaintenance() {
     const pnlPct = ((data.price - pos.entryPrice) / pos.entryPrice) * 100;
     const best = topCandidates()[0];
     if (best && best.score > data.score + 22 && pnlPct < 0.5 && pnlPct > -2) {
-      logLine('scan', `Rotazione ${best.symbol.replace('USDT','')} >> ${pos.symbol.replace('USDT','')}`);
-      await executeSell(pos.id, data.price, `Rotazione → ${best.symbol.replace('USDT','')}`);
+      logLine('scan', `Rotazione ${displaySymbol(best.symbol)} >> ${displaySymbol(pos.symbol)}`);
+      await executeSell(pos.id, data.price, `Rotazione → ${displaySymbol(best.symbol)}`);
     }
   }
 }
@@ -1333,11 +1402,22 @@ function setScanStatus(kind, text) {
 // BACKTEST ENGINE
 // ===================================================================
 async function fetchKlinesHistorical(symbol, interval, limit = 1000) {
-  const url = `${STATE.api.endpoint}/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=${Math.min(1000, limit)}`;
+  // Kraken OHLC restituisce fino a 720 candele a chiamata, ignorando 'limit'
+  const tfMin = KRAKEN_TF[interval] || 15;
+  const url = `${STATE.api.endpoint}/0/public/OHLC?pair=${symbol}&interval=${tfMin}`;
   const r = await fetch(url);
   if (!r.ok) throw new Error('HTTP ' + r.status);
   const data = await r.json();
-  return data.map(k => ({ time: k[0], open: +k[1], high: +k[2], low: +k[3], close: +k[4], volume: +k[5], isFinal: true }));
+  if (data.error && data.error.length) throw new Error(data.error.join(', '));
+  const result = data.result || {};
+  const keys = Object.keys(result).filter(k => k !== 'last');
+  if (!keys.length) return [];
+  const arr = result[keys[0]] || [];
+  return arr.map(k => ({
+    time: k[0] * 1000,
+    open: +k[1], high: +k[2], low: +k[3], close: +k[4],
+    volume: +k[6], isFinal: true,
+  }));
 }
 
 async function runBacktest(symbol, interval, strategyName, capital) {
@@ -1428,11 +1508,11 @@ async function runMultiBacktest() {
   const avgWR = results.reduce((s, r) => s + r.winRate, 0) / results.length;
   const html = `<div class="info-box"><strong>${strat.toUpperCase()} su ${results.length} asset, TF ${tf}:</strong><br>
     Return medio ${avg >= 0 ? '+' : ''}${avg.toFixed(2)}% · WR medio ${avgWR.toFixed(1)}%<br>
-    Migliore: ${results[0].sym.replace('USDT', '')} ${results[0].totalReturn >= 0 ? '+' : ''}${results[0].totalReturn.toFixed(2)}%<br>
-    Peggiore: ${results[results.length - 1].sym.replace('USDT', '')} ${results[results.length - 1].totalReturn.toFixed(2)}%
+    Migliore: ${displaySymbol(results[0].sym)} ${results[0].totalReturn >= 0 ? '+' : ''}${results[0].totalReturn.toFixed(2)}%<br>
+    Peggiore: ${results[results.length - 1].displaySymbol(sym)} ${results[results.length - 1].totalReturn.toFixed(2)}%
     </div>
     <table class="trade-table" style="margin-top:10px"><thead><tr><th>Sym</th><th>Return</th><th>WR</th><th>N</th><th>PF</th><th>Sharpe</th><th>DD</th></tr></thead>
-    <tbody>${results.map(r => `<tr><td>${r.sym.replace('USDT', '')}</td>
+    <tbody>${results.map(r => `<tr><td>${displaySymbol(r.sym)}</td>
       <td class="mono" style="color:${r.totalReturn >= 0 ? 'var(--green)' : 'var(--red)'}">${r.totalReturn >= 0 ? '+' : ''}${r.totalReturn.toFixed(2)}%</td>
       <td class="mono">${r.winRate.toFixed(1)}%</td><td class="mono">${r.nTrades}</td>
       <td class="mono">${r.profitFactor.toFixed(2)}</td><td class="mono">${r.sharpe.toFixed(2)}</td>
@@ -1693,7 +1773,7 @@ function renderPositions() {
       const cls = pnl >= 0 ? 'green' : 'red';
       const age = Math.floor((Date.now() - p.entryTime) / 60000);
       return `<div class="position-card">
-        <div class="row"><span class="symbol">${p.symbol.replace('USDT', '/USDT')}</span><span class="pnl ${cls}">${pnl >= 0 ? '+' : '-'}${fmtUSD(pnl)}</span></div>
+        <div class="row"><span class="symbol">${displayPair(p.symbol)}</span><span class="pnl ${cls}">${pnl >= 0 ? '+' : '-'}${fmtUSD(pnl)}</span></div>
         <div class="detail"><span>Entry</span><span class="mono">$${fmtPx(p.entryPrice)}</span></div>
         <div class="detail"><span>Now</span><span class="mono">$${fmtPx(cur)}</span></div>
         <div class="detail"><span>P&L %</span><span class="mono" style="color:${pnl >= 0 ? 'var(--green)' : 'var(--red)'}">${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%</span></div>
@@ -1708,7 +1788,7 @@ function renderPositions() {
       b.onclick = async () => {
         const id = b.dataset.closePos;
         const pos = STATE.positions.find(p => p.id === id); if (!pos) return;
-        if (!confirm(`Chiudere ${pos.symbol.replace('USDT', '')}?`)) return;
+        if (!confirm(`Chiudere ${displaySymbol(pos.symbol)}?`)) return;
         const px = STATE.scanData[pos.symbol] ? STATE.scanData[pos.symbol].price : pos.entryPrice;
         await executeSell(id, px, 'Chiusura manuale');
         updateStatsUI();
@@ -1726,7 +1806,7 @@ function renderHistory() {
     const d = new Date(t.time);
     const dt = d.toLocaleDateString('it-IT', { day: '2-digit', month: '2-digit' }) + ' ' + d.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
     const cls = t.pnl >= 0 ? 'green' : 'red';
-    return `<tr><td class="mono">${dt}</td><td>${t.symbol.replace('USDT', '')}</td>
+    return `<tr><td class="mono">${dt}</td><td>${displaySymbol(t.symbol)}</td>
       <td><span class="badge-side ${t.mode === 'live' ? 'live-side' : 'buy'}">${t.mode === 'live' ? 'LIVE' : (t.side || 'LONG')}</span></td>
       <td class="mono">$${fmtPx(t.entry)}</td><td class="mono">$${fmtPx(t.exit)}</td><td class="mono">${t.qty.toFixed(4)}</td>
       <td class="mono" style="color:var(--${cls})">${t.pnl >= 0 ? '+' : '-'}${fmtUSD(t.pnl)}</td>
@@ -1756,7 +1836,7 @@ function renderScanner() {
     if (isPos) cls.push('has-pos'); else if (isTop) cls.push('top');
     return `<div class="${cls.join(' ')}" data-sym="${e.symbol}">
       ${isPos ? '<div class="pos-tag">POS</div>' : ''}
-      <div class="sym">${e.symbol.replace('USDT', '')} <span class="mono" style="font-size:10px;color:var(--text-3)">${e.score.toFixed(0)}</span></div>
+      <div class="sym">${displaySymbol(e.symbol)} <span class="mono" style="font-size:10px;color:var(--text-3)">${e.score.toFixed(0)}</span></div>
       <div class="px mono">$${fmtPx(e.price)}</div>
       <div class="chg mono ${e.change >= 0 ? 'green' : 'red'}">${e.change >= 0 ? '+' : ''}${e.change.toFixed(2)}%</div>
       <div class="score-bar"><div class="score-fill ${e.score >= 65 ? 'good' : ''}" style="width:${e.score}%"></div></div>
@@ -1771,10 +1851,10 @@ function renderCorrelationMatrix() {
   const syms = Object.keys(STATE.scanData);
   if (!syms.length) { t.innerHTML = ''; return; }
   let h = '<thead><tr><th></th>';
-  for (const s of syms) h += `<th>${s.replace('USDT', '')}</th>`;
+  for (const s of syms) h += `<th>${displaySymbol(s)}</th>`;
   h += '</tr></thead><tbody>';
   for (const r of syms) {
-    h += `<tr><th>${r.replace('USDT', '')}</th>`;
+    h += `<tr><th>${displaySymbol(r)}</th>`;
     for (const c of syms) {
       if (r === c) { h += `<td style="background:rgba(255,255,255,0.06);color:var(--text-3)">1.00</td>`; continue; }
       const rho = STATE.correlations[`${r}|${c}`] || STATE.correlations[`${c}|${r}`] || 0;
@@ -1828,7 +1908,7 @@ function updateModeUI() {
   if (STATE.mode === 'live') {
     badge.classList.add('live'); badge.textContent = 'LIVE ⚠';
     title.innerHTML = 'Modalità: <span style="color:var(--red)">LIVE</span>';
-    sub.textContent = 'Ordini reali su Binance.';
+    sub.textContent = 'Ordini reali su Kraken.';
     if (perfLabel) perfLabel.textContent = 'LIVE';
     if (tog) tog.checked = true;
   } else {
@@ -2054,7 +2134,7 @@ function refreshChartForCurrent() {
   if (d && d.candles) {
     STATE.candles = d.candles;
     STATE.currentPrice = d.price;
-    document.getElementById('chart-title').textContent = STATE.currentSymbol.replace('USDT', ' / USDT');
+    document.getElementById('chart-title').textContent = displayPair(STATE.currentSymbol);
     STATE.regime = detectRegime(d.candles);
     updateRegimeUI();
     updateIndicatorsUI();
@@ -2066,18 +2146,35 @@ function refreshChartForCurrent() {
 
 function connectWS() {
   if (ws) try { ws.close(); } catch (e) {}
-  const s = STATE.currentSymbol.toLowerCase();
-  const tf = STATE.timeframe;
+  const tfMin = KRAKEN_TF[STATE.timeframe] || 15;
+  // Kraken v2 vuole il simbolo nel formato "XBT/USDT" non "XBTUSDT"
+  const base = displaySymbol(STATE.currentSymbol);
+  const wsSymbol = `${base}/USDT`;
   try {
-    ws = new WebSocket(`wss://stream.binance.com:9443/ws/${s}@kline_${tf}`);
-    ws.onopen = () => setConnStatus('live');
+    ws = new WebSocket('wss://ws.kraken.com/v2');
+    ws.onopen = () => {
+      setConnStatus('live');
+      // Subscribe to OHLC channel
+      ws.send(JSON.stringify({
+        method: 'subscribe',
+        params: { channel: 'ohlc', symbol: [wsSymbol], interval: tfMin }
+      }));
+    };
     ws.onclose = () => setConnStatus('err');
     ws.onerror = () => setConnStatus('err');
     ws.onmessage = (msg) => {
       try {
         const d = JSON.parse(msg.data);
-        const k = d.k;
-        const candle = { time: k.t, open: +k.o, high: +k.h, low: +k.l, close: +k.c, volume: +k.v, isFinal: k.x };
+        // Kraken v2 manda eventi tipo: { channel: "ohlc", type: "update", data: [{interval_begin, open, high, low, close, volume, ...}] }
+        if (d.channel !== 'ohlc' || !d.data || !d.data.length) return;
+        const k = d.data[0];
+        const time = new Date(k.interval_begin).getTime();
+        const candle = {
+          time,
+          open: +k.open, high: +k.high, low: +k.low, close: +k.close,
+          volume: +k.volume,
+          isFinal: d.type === 'snapshot',
+        };
         const arr = STATE.candles;
         if (arr.length && arr[arr.length - 1].time === candle.time) arr[arr.length - 1] = candle;
         else { arr.push(candle); if (arr.length > 500) arr.shift(); }
@@ -2190,7 +2287,7 @@ function bindEvents() {
   document.getElementById('mode-toggle').addEventListener('change', (e) => {
     if (e.target.checked) {
       if (!STATE.api.verified) {
-        alert('Configura e verifica le API Binance prima.');
+        alert('Configura e verifica le API Kraken prima.');
         e.target.checked = false;
         document.getElementById('modal-settings').classList.add('open');
         switchSettingsTab('api');
@@ -2247,7 +2344,7 @@ function bindEvents() {
   document.getElementById('btn-settings').addEventListener('click', () => {
     document.getElementById('api-key').value = STATE.api.key || '';
     document.getElementById('api-secret').value = STATE.api.secret || '';
-    document.getElementById('api-endpoint').value = STATE.api.endpoint || 'https://api.binance.com';
+    document.getElementById('api-endpoint').value = STATE.api.endpoint || 'https://api.kraken.com';
     document.getElementById('tg-token').value = STATE.tg.token || '';
     document.getElementById('tg-chat').value = STATE.tg.chat || '';
     document.getElementById('fb-project').value = STATE.fb.project || '';
@@ -2265,24 +2362,24 @@ function bindEvents() {
   document.getElementById('btn-api-save').addEventListener('click', async () => {
     STATE.api.key = document.getElementById('api-key').value.trim();
     STATE.api.secret = document.getElementById('api-secret').value.trim();
-    STATE.api.endpoint = document.getElementById('api-endpoint').value.trim() || 'https://api.binance.com';
+    STATE.api.endpoint = document.getElementById('api-endpoint').value.trim() || 'https://api.kraken.com';
     saveSession();
     if (STATE.api.key && STATE.api.secret) {
       setApiStatus('unk', 'Verifica...');
       const v = await verifyApi();
-      if (v.ok) logLine('info', 'API Binance OK'); else logLine('error', 'API: ' + v.error);
+      if (v.ok) logLine('info', 'API Kraken OK'); else logLine('error', 'API: ' + v.error);
     }
   });
   document.getElementById('btn-api-test').addEventListener('click', async () => {
     STATE.api.key = document.getElementById('api-key').value.trim();
     STATE.api.secret = document.getElementById('api-secret').value.trim();
-    STATE.api.endpoint = document.getElementById('api-endpoint').value.trim() || 'https://api.binance.com';
+    STATE.api.endpoint = document.getElementById('api-endpoint').value.trim() || 'https://api.kraken.com';
     setApiStatus('unk', 'Test...');
     await verifyApi();
   });
   document.getElementById('btn-api-clear').addEventListener('click', () => {
     if (!confirm('Cancellare API?')) return;
-    STATE.api = { key: '', secret: '', endpoint: 'https://api.binance.com', verified: false };
+    STATE.api = { key: '', secret: '', endpoint: 'https://api.kraken.com', verified: false };
     document.getElementById('api-key').value = ''; document.getElementById('api-secret').value = '';
     setApiStatus('unk', 'API non configurate');
     if (STATE.mode === 'live') { STATE.mode = 'paper'; updateModeUI(); }
@@ -2357,7 +2454,7 @@ function bindEvents() {
 
   // Populate bt-symbol
   const btSym = document.getElementById('bt-symbol');
-  if (btSym) btSym.innerHTML = UNIVERSE.map(s => `<option value="${s}">${s.replace('USDT', '/USDT')}</option>`).join('');
+  if (btSym) btSym.innerHTML = UNIVERSE.map(s => `<option value="${s}">${displayPair(s)}</option>`).join('');
 
   window.addEventListener('resize', resizeChart);
 }
@@ -2367,7 +2464,7 @@ function bindEvents() {
 // ===================================================================
 function saveSession() {
   try {
-    localStorage.setItem('aura_trader_v3', JSON.stringify({
+    localStorage.setItem('aura_trader_v3_kraken', JSON.stringify({
       wallet: STATE.wallet, positions: STATE.positions, history: STATE.history.slice(0, 100),
       settings: STATE.settings, strategy: STATE.strategy, timeframe: STATE.timeframe,
       mode: STATE.mode, api: STATE.api, tg: STATE.tg, fb: STATE.fb, news: { apikey: STATE.news.apikey },
@@ -2379,7 +2476,7 @@ function saveSession() {
 
 function loadSession() {
   try {
-    const raw = localStorage.getItem('aura_trader_v3');
+    const raw = localStorage.getItem('aura_trader_v3_kraken');
     if (!raw) return;
     const s = JSON.parse(raw);
     if (s.wallet) STATE.wallet = s.wallet;
@@ -2440,7 +2537,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   updateBotUI();
   updateModeUI();
   resizeChart();
-  logLine('info', 'Aura Trader Pro v3 inizializzato');
+  logLine('info', 'Aura Trader Pro v3.1 Kraken Edition inizializzato');
   logLine('info', `${STATE.mode.toUpperCase()} · ${STATE.strategy.toUpperCase()}`);
   if (STATE.api.verified || (STATE.api.key && STATE.api.secret)) {
     setApiStatus('unk', 'Caricate · verifica...');
